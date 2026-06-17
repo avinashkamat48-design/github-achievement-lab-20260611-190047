@@ -1,2 +1,23 @@
-# github-achievement-lab-20260611-190047
-Small public practice repo for learning GitHub issues, pull requests, and contribution workflows.
+# GitHub Achievement Lab
+
+A small public practice repo for learning GitHub issues, pull requests, code review,
+and contribution workflows without turning the contribution graph into noise.
+
+The repo now doubles as a lightweight contribution-quality kit: it collects
+repeatable checklists, scoring helpers, and examples for deciding whether a
+GitHub activity is useful enough to publish.
+
+## What This Repo Is For
+
+- Practicing scoped commits and pull requests
+- Keeping issue comments useful and specific
+- Writing code reviews that point to concrete behavior
+- Tracking learning notes from open-source work
+- Separating real contribution work from graph-padding habits
+
+## Quick Links
+
+- [Workflow notes](docs/workflow.md)
+- [Pull request checklist](docs/pr-checklist.md)
+- [Review notes](docs/review-notes.md)
+- [Learning log](docs/learning-log.md)
