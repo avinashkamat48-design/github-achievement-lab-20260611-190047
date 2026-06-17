@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "github-achievement-lab"
+version = "0.1.0"
+description = "Practice tools for useful GitHub contributions."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "github-achievement-lab contributors"}]
+dependencies = []
+
+[project.scripts]
+contribution-quality = "achievement_lab.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-q"
