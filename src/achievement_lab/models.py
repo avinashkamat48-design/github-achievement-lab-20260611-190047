@@ -5,6 +5,7 @@ from typing import Literal
 
 
 ContributionKind = Literal["commit", "pull_request", "issue", "review", "docs"]
+CONTRIBUTION_KINDS = {"commit", "pull_request", "issue", "review", "docs"}
 
 
 @dataclass(frozen=True)

@@ -33,3 +33,23 @@ def test_load_contributions_rejects_non_list_json(tmp_path) -> None:
 
     with pytest.raises(ValueError, match="JSON list"):
         load_contributions(path)
+
+
+def test_load_contributions_rejects_unknown_kind(tmp_path) -> None:
+    path = tmp_path / "plan.json"
+    path.write_text(
+        json.dumps(
+            [
+                {
+                    "title": "Mystery work",
+                    "kind": "achievement",
+                    "summary": "This kind is not supported.",
+                    "impact": "The loader should reject it.",
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="unknown contribution kind"):
+        load_contributions(path)
