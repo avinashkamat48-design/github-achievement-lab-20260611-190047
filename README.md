@@ -21,3 +21,13 @@ GitHub activity is useful enough to publish.
 - [Pull request checklist](docs/pr-checklist.md)
 - [Review notes](docs/review-notes.md)
 - [Learning log](docs/learning-log.md)
+
+## Local Usage
+
+```bash
+python -m pytest -q
+python -m achievement_lab.cli examples/quality-plan.json --report reports/quality-report.md
+```
+
+The CLI scores each planned contribution and writes a Markdown report that is
+easy to skim before opening a pull request, issue, or review.
