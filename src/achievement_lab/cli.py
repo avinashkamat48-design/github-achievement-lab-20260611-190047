@@ -5,7 +5,7 @@ from pathlib import Path
 
 from achievement_lab.loaders import load_contributions
 from achievement_lab.reporting import render_markdown
-from achievement_lab.scoring import score_contribution
+from achievement_lab.summaries import render_terminal_summary
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -20,9 +20,8 @@ def main() -> None:
     contributions = load_contributions(args.plan)
     report = render_markdown(contributions)
 
-    for contribution in contributions:
-        score = score_contribution(contribution)
-        print(f"{score.total:3d} {score.label:12s} {contribution.title}")
+    for line in render_terminal_summary(contributions):
+        print(line)
 
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
