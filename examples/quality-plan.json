@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Validate malformed CSV input before evaluation",
+    "kind": "pull_request",
+    "summary": "Fail fast when required columns are missing from a logged-decision CSV before running policy evaluation.",
+    "impact": "Maintainers get a clearer error and users can fix data issues faster.",
+    "evidence": ["manual repro with a CSV missing the oracle_tool column"],
+    "tests": ["python -m pytest tests/test_evaluator.py -q"],
+    "risks": ["strict validation may reject previously tolerated malformed data"]
+  },
+  {
+    "title": "Review unsafe fallback behavior",
+    "kind": "review",
+    "summary": "Check whether a router fallback can pick a sensitive tool when approval is missing.",
+    "impact": "Prevents a safety regression in policy-routing examples.",
+    "evidence": ["linked to the fallback branch and affected test case"],
+    "tests": ["read changed router path", "confirmed approval metadata is available"],
+    "risks": ["review depends on the current tool catalog semantics"]
+  }
+]
