@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from achievement_lab import defaults
 from achievement_lab.models import Contribution
 
 
@@ -17,27 +18,27 @@ def score_contribution(contribution: Contribution) -> QualityScore:
     reasons: list[str] = []
 
     if contribution.is_actionable():
-        score += 30
+        score += defaults.ACTIONABLE_POINTS
         reasons.append("has a clear title, summary, and impact")
     if contribution.has_verification():
-        score += 25
+        score += defaults.VERIFICATION_POINTS
         reasons.append("includes verification evidence")
     if len(contribution.summary.split()) >= 8:
-        score += 15
+        score += defaults.CONTEXT_POINTS
         reasons.append("summary has enough context")
     if contribution.risks:
-        score += 15
+        score += defaults.RISK_POINTS
         reasons.append("calls out risks or tradeoffs")
     if contribution.kind in {"pull_request", "review"} and contribution.tests:
-        score += 15
+        score += defaults.DEVELOPER_CHECK_POINTS
         reasons.append("developer-facing work includes tests or checks")
 
     return QualityScore(total=score, label=_label(score), reasons=reasons)
 
 
 def _label(score: int) -> str:
-    if score >= 80:
+    if score >= defaults.READY_THRESHOLD:
         return "ready"
-    if score >= 55:
+    if score >= defaults.NEEDS_POLISH_THRESHOLD:
         return "needs polish"
     return "not ready"
