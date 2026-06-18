@@ -21,6 +21,9 @@ def _from_dict(item: Any) -> Contribution:
     if kind not in CONTRIBUTION_KINDS:
         allowed = ", ".join(sorted(CONTRIBUTION_KINDS))
         raise ValueError(f"unknown contribution kind '{kind}'; expected one of: {allowed}")
+    for field in ("title", "summary", "impact"):
+        if not str(item.get(field, "")).strip():
+            raise ValueError(f"contribution entry is missing required field '{field}'")
     return Contribution(
         title=str(item.get("title", "")),
         kind=kind,

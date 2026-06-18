@@ -53,3 +53,11 @@ def test_load_contributions_rejects_unknown_kind(tmp_path) -> None:
 
     with pytest.raises(ValueError, match="unknown contribution kind"):
         load_contributions(path)
+
+
+def test_load_contributions_requires_core_fields(tmp_path) -> None:
+    path = tmp_path / "plan.json"
+    path.write_text(json.dumps([{"title": "Missing detail", "kind": "commit"}]), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="summary"):
+        load_contributions(path)
