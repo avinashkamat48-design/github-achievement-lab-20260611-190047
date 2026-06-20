@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Update stuff",
+    "kind": "commit",
+    "summary": "Small update",
+    "impact": "Unclear"
+  },
+  {
+    "title": "Review change",
+    "kind": "review",
+    "summary": "Look at the pull request and comment.",
+    "impact": "Maybe useful"
+  }
+]
