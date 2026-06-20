@@ -13,11 +13,21 @@ from achievement_lab.summaries import render_terminal_summary
 from achievement_lab.validation import validate_contributions
 
 
+def score_threshold(value: str) -> int:
+    try:
+        parsed = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("must be an integer") from exc
+    if not 0 <= parsed <= 100:
+        raise argparse.ArgumentTypeError("must be between 0 and 100")
+    return parsed
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Score planned GitHub contributions.")
     parser.add_argument("plan", type=Path, help="Path to a JSON contribution plan")
     parser.add_argument("--csv", type=Path, help="Optional CSV score output path")
-    parser.add_argument("--min-score", type=int, help="Only show contributions at or above this score")
+    parser.add_argument("--min-score", type=score_threshold, help="Only show contributions at or above this score")
     parser.add_argument("--report", type=Path, help="Optional markdown report output path")
     parser.add_argument("--schema", type=Path, help="Optional JSON schema output path")
     parser.add_argument("--strict", action="store_true", help="Exit with an error when validation issues are present")

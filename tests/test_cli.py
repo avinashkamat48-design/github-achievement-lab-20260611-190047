@@ -1,4 +1,5 @@
 from achievement_lab.cli import build_parser
+import pytest
 
 
 def test_cli_parser_accepts_plan_report_and_schema_paths() -> None:
@@ -23,3 +24,9 @@ def test_cli_parser_accepts_plan_report_and_schema_paths() -> None:
     assert args.report.name == "out.md"
     assert args.schema.name == "schema.json"
     assert args.strict
+
+
+@pytest.mark.parametrize("value", ["-1", "101", "high"])
+def test_cli_parser_rejects_invalid_min_score(value: str) -> None:
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(["plan.json", "--min-score", value])
