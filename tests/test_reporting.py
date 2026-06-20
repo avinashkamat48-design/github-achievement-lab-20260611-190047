@@ -49,3 +49,4 @@ def test_render_markdown_includes_validation_issues() -> None:
 
     assert "## Validation" in report
     assert "missing evidence or tests" in report
+    assert "Next steps:" in report

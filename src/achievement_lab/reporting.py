@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from achievement_lab.models import Contribution
+from achievement_lab.recommendations import recommend_next_steps
 from achievement_lab.scoring import score_contribution
 from achievement_lab.summaries import summarize_by_kind, summarize_by_label
 from achievement_lab.validation import validate_contributions
@@ -30,6 +31,7 @@ def render_markdown(contributions: list[Contribution]) -> str:
     lines.extend(["", "## Details", ""])
     for contribution in contributions:
         score = score_contribution(contribution)
+        recommendations = recommend_next_steps(contribution)
         lines.extend(
             [
                 f"### {contribution.title}",
@@ -38,6 +40,7 @@ def render_markdown(contributions: list[Contribution]) -> str:
                 f"- Impact: {contribution.impact}",
                 f"- Score: {score.total} ({score.label})",
                 f"- Reasons: {', '.join(score.reasons) if score.reasons else 'none'}",
+                f"- Next steps: {', '.join(recommendations) if recommendations else 'none'}",
                 "",
             ]
         )
