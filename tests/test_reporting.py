@@ -15,6 +15,8 @@ def test_render_markdown_includes_summary_table() -> None:
     )
 
     assert "| Title | Kind | Score | Label |" in report
+    assert "## Summary" in report
+    assert "- Contributions: 1" in report
     assert "Improve docs" in report
 
 

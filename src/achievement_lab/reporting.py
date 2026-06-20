@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from achievement_lab.models import Contribution
 from achievement_lab.scoring import score_contribution
+from achievement_lab.summaries import summarize_by_kind, summarize_by_label
 from achievement_lab.validation import validate_contributions
 
 
@@ -18,6 +19,13 @@ def render_markdown(contributions: list[Contribution]) -> str:
         lines.append(
             f"| {_cell(contribution.title)} | {contribution.kind} | {score.total} | {score.label} |"
         )
+
+    lines.extend(["", "## Summary", ""])
+    lines.append(f"- Contributions: {len(contributions)}")
+    for kind, count in sorted(summarize_by_kind(contributions).items()):
+        lines.append(f"- `{kind}`: {count}")
+    for label, count in sorted(summarize_by_label(contributions).items()):
+        lines.append(f"- `{label}`: {count}")
 
     lines.extend(["", "## Details", ""])
     for contribution in contributions:
