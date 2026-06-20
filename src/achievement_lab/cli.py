@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from achievement_lab.exports import write_csv
 from achievement_lab.loaders import load_contributions
 from achievement_lab.reporting import render_markdown
 from achievement_lab.schema import contribution_plan_schema
@@ -14,6 +15,7 @@ from achievement_lab.validation import validate_contributions
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Score planned GitHub contributions.")
     parser.add_argument("plan", type=Path, help="Path to a JSON contribution plan")
+    parser.add_argument("--csv", type=Path, help="Optional CSV score output path")
     parser.add_argument("--report", type=Path, help="Optional markdown report output path")
     parser.add_argument("--schema", type=Path, help="Optional JSON schema output path")
     parser.add_argument("--strict", action="store_true", help="Exit with an error when validation issues are present")
@@ -29,6 +31,9 @@ def main() -> int:
         args.schema.parent.mkdir(parents=True, exist_ok=True)
         args.schema.write_text(json.dumps(contribution_plan_schema(), indent=2) + "\n", encoding="utf-8")
         print(f"wrote {args.schema}")
+    if args.csv:
+        write_csv(args.csv, contributions)
+        print(f"wrote {args.csv}")
 
     for line in render_terminal_summary(contributions):
         print(line)
