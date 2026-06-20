@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Reproduce missing configuration docs issue",
+    "kind": "issue",
+    "summary": "Confirm whether the setup instructions omit a required environment variable for local test runs.",
+    "impact": "Maintainers get a reproducible docs gap instead of a vague setup complaint.",
+    "evidence": [
+      "fresh clone setup notes",
+      "terminal output from the failing command"
+    ],
+    "tests": [
+      "python -m pytest -q after adding the missing variable"
+    ],
+    "risks": [
+      "local environment may differ from CI"
+    ]
+  }
+]
