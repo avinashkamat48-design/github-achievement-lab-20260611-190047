@@ -2,9 +2,9 @@
 
 ## Near Term
 
-- Add stricter validation for contribution plan fields.
-- Add a JSON schema for editor integration.
-- Generate a compact terminal summary grouped by contribution kind.
+- Add richer recommendation text for weak contribution plans.
+- Add fixtures for common review and issue-triage workflows.
+- Add a compact weekly learning-log export.
 
 ## Later
 
