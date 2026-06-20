@@ -16,6 +16,7 @@ def test_render_html_outputs_table() -> None:
     )
 
     assert "<table>" in html
+    assert "Next steps" in html
     assert "Add HTML report" in html
 
 
