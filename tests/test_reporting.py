@@ -31,3 +31,19 @@ def test_render_markdown_escapes_table_pipes() -> None:
     )
 
     assert "Fix parser \\| loader" in report
+
+
+def test_render_markdown_includes_validation_issues() -> None:
+    report = render_markdown(
+        [
+            Contribution(
+                title="Thin update",
+                kind="commit",
+                summary="Small note",
+                impact="Tiny",
+            )
+        ]
+    )
+
+    assert "## Validation" in report
+    assert "missing evidence or tests" in report

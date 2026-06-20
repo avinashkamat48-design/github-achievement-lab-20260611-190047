@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from achievement_lab.models import Contribution
 from achievement_lab.scoring import score_contribution
+from achievement_lab.validation import validate_contributions
 
 
 def render_markdown(contributions: list[Contribution]) -> str:
@@ -32,6 +33,13 @@ def render_markdown(contributions: list[Contribution]) -> str:
                 "",
             ]
         )
+    issues = validate_contributions(contributions)
+    lines.extend(["## Validation", ""])
+    if not issues:
+        lines.append("- No validation issues found.")
+    else:
+        for issue in issues:
+            lines.append(f"- **{issue.severity}** `{issue.title}`: {issue.message}")
     return "\n".join(lines)
 
 
