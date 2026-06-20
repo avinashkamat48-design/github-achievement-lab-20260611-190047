@@ -11,4 +11,8 @@ test:
 	$(PYTHON) -m pytest -q
 
 report:
-	$(PYTHON) -m achievement_lab.cli examples/quality-plan.json --report reports/quality-report.md
+	$(PYTHON) -m achievement_lab.cli examples/quality-plan.json \
+		--report reports/quality-report.md \
+		--csv reports/quality-report.csv \
+		--html reports/quality-report.html \
+		--schema reports/contribution-plan.schema.json
