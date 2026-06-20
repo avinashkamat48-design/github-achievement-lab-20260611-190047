@@ -6,6 +6,7 @@ from pathlib import Path
 
 from achievement_lab.exports import write_csv
 from achievement_lab.filters import filter_by_min_score
+from achievement_lab.html import render_html
 from achievement_lab.loaders import load_contributions
 from achievement_lab.reporting import render_markdown
 from achievement_lab.schema import contribution_plan_schema
@@ -27,6 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Score planned GitHub contributions.")
     parser.add_argument("plan", type=Path, help="Path to a JSON contribution plan")
     parser.add_argument("--csv", type=Path, help="Optional CSV score output path")
+    parser.add_argument("--html", type=Path, help="Optional HTML report output path")
     parser.add_argument("--min-score", type=score_threshold, help="Only show contributions at or above this score")
     parser.add_argument("--report", type=Path, help="Optional markdown report output path")
     parser.add_argument("--schema", type=Path, help="Optional JSON schema output path")
@@ -46,6 +48,10 @@ def main() -> int:
     if args.csv:
         write_csv(args.csv, contributions)
         print(f"wrote {args.csv}")
+    if args.html:
+        args.html.parent.mkdir(parents=True, exist_ok=True)
+        args.html.write_text(render_html(contributions), encoding="utf-8")
+        print(f"wrote {args.html}")
 
     for line in render_terminal_summary(contributions):
         print(line)

@@ -8,6 +8,8 @@ def test_cli_parser_accepts_plan_report_and_schema_paths() -> None:
             "plan.json",
             "--csv",
             "scores.csv",
+            "--html",
+            "report.html",
             "--min-score",
             "80",
             "--report",
@@ -20,6 +22,7 @@ def test_cli_parser_accepts_plan_report_and_schema_paths() -> None:
 
     assert args.plan.name == "plan.json"
     assert args.csv.name == "scores.csv"
+    assert args.html.name == "report.html"
     assert args.min_score == 80
     assert args.report.name == "out.md"
     assert args.schema.name == "schema.json"
