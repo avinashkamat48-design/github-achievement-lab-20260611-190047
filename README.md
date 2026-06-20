@@ -23,6 +23,7 @@ GitHub activity is useful enough to publish.
 - [Learning log](docs/learning-log.md)
 - [Validation](docs/validation.md)
 - [Exports](docs/exports.md)
+- [Example plans](docs/examples.md)
 - [Safe public examples](docs/safe-examples.md)
 
 ## Local Usage
