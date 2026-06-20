@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from achievement_lab.exports import write_csv
+from achievement_lab.filters import filter_by_min_score
 from achievement_lab.loaders import load_contributions
 from achievement_lab.reporting import render_markdown
 from achievement_lab.schema import contribution_plan_schema
@@ -16,6 +17,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Score planned GitHub contributions.")
     parser.add_argument("plan", type=Path, help="Path to a JSON contribution plan")
     parser.add_argument("--csv", type=Path, help="Optional CSV score output path")
+    parser.add_argument("--min-score", type=int, help="Only show contributions at or above this score")
     parser.add_argument("--report", type=Path, help="Optional markdown report output path")
     parser.add_argument("--schema", type=Path, help="Optional JSON schema output path")
     parser.add_argument("--strict", action="store_true", help="Exit with an error when validation issues are present")
@@ -24,7 +26,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     args = build_parser().parse_args()
-    contributions = load_contributions(args.plan)
+    contributions = filter_by_min_score(load_contributions(args.plan), args.min_score)
     report = render_markdown(contributions)
 
     if args.schema:
