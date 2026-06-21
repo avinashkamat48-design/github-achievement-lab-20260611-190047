@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0
+
+- Added learning-log completeness assessment.
+- Added completeness counts to weekly learning-log output.
+- Added starter templates for each contribution kind.
+- Added CLI template generation.
+- Added review-focused example plan and template docs.
+
 ## 0.3.0
 
 - Added weekly learning-log rendering.
