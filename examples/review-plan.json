@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Review strict parser validation behavior",
+    "kind": "review",
+    "summary": "Check whether invalid plan fields fail with actionable messages and matching tests.",
+    "impact": "Maintainers can trust validation changes without accepting vague failure behavior.",
+    "evidence": [
+      "changed loader validation path",
+      "failing fixture with an unknown contribution kind"
+    ],
+    "tests": [
+      "python -m pytest tests/test_loaders.py -q"
+    ],
+    "risks": [
+      "stricter validation may reject older example files"
+    ]
+  }
+]
