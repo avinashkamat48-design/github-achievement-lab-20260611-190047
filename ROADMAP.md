@@ -4,7 +4,7 @@
 
 - Add richer recommendation text for weak contribution plans.
 - Add fixtures for common review and issue-triage workflows.
-- Add a compact weekly learning-log export.
+- Add validation for generated learning-log completeness.
 
 ## Later
 
