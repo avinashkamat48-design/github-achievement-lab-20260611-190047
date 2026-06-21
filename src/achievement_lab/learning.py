@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 
+from achievement_lab.completeness import assess_completeness
 from achievement_lab.models import Contribution
 from achievement_lab.scoring import score_contribution
 
@@ -10,6 +11,7 @@ def render_learning_log(contributions: list[Contribution], *, week: str = "curre
     grouped: dict[str, list[Contribution]] = defaultdict(list)
     for contribution in contributions:
         grouped[contribution.kind].append(contribution)
+    completeness = assess_completeness(contributions)
 
     lines = [
         "# Weekly Contribution Learning Log",
@@ -23,6 +25,13 @@ def render_learning_log(contributions: list[Contribution], *, week: str = "curre
 
     for kind, items in sorted(grouped.items()):
         lines.append(f"- `{kind}`: {len(items)}")
+    lines.extend(
+        [
+            f"- Verified entries: {completeness.verified}/{completeness.total}",
+            f"- Entries with risk notes: {completeness.with_risks}/{completeness.total}",
+            f"- Complete: {'yes' if completeness.is_complete else 'no'}",
+        ]
+    )
 
     lines.extend(["", "## Notes", ""])
     for kind, items in sorted(grouped.items()):
