@@ -26,6 +26,7 @@ GitHub activity is useful enough to publish.
 - [Validation](docs/validation.md)
 - [Exports](docs/exports.md)
 - [Example plans](docs/examples.md)
+- [Contribution plan templates](docs/templates.md)
 - [Safe public examples](docs/safe-examples.md)
 
 ## Local Usage
