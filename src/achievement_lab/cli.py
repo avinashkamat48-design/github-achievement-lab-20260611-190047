@@ -7,6 +7,7 @@ from pathlib import Path
 from achievement_lab.exports import write_csv
 from achievement_lab.filters import filter_by_min_score
 from achievement_lab.html import render_html
+from achievement_lab.learning import render_learning_log
 from achievement_lab.loaders import load_contributions
 from achievement_lab.reporting import render_markdown
 from achievement_lab.schema import contribution_plan_schema
@@ -29,10 +30,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("plan", type=Path, help="Path to a JSON contribution plan")
     parser.add_argument("--csv", type=Path, help="Optional CSV score output path")
     parser.add_argument("--html", type=Path, help="Optional HTML report output path")
+    parser.add_argument("--learning-log", type=Path, help="Optional weekly learning log output path")
     parser.add_argument("--min-score", type=score_threshold, help="Only show contributions at or above this score")
     parser.add_argument("--report", type=Path, help="Optional markdown report output path")
     parser.add_argument("--schema", type=Path, help="Optional JSON schema output path")
     parser.add_argument("--strict", action="store_true", help="Exit with an error when validation issues are present")
+    parser.add_argument("--week", default="current week", help="Label to use in the weekly learning log")
     return parser
 
 
@@ -52,6 +55,10 @@ def main() -> int:
         args.html.parent.mkdir(parents=True, exist_ok=True)
         args.html.write_text(render_html(contributions), encoding="utf-8")
         print(f"wrote {args.html}")
+    if args.learning_log:
+        args.learning_log.parent.mkdir(parents=True, exist_ok=True)
+        args.learning_log.write_text(render_learning_log(contributions, week=args.week), encoding="utf-8")
+        print(f"wrote {args.learning_log}")
 
     for line in render_terminal_summary(contributions):
         print(line)

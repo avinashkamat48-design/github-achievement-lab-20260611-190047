@@ -10,6 +10,8 @@ def test_cli_parser_accepts_plan_report_and_schema_paths() -> None:
             "scores.csv",
             "--html",
             "report.html",
+            "--learning-log",
+            "learning.md",
             "--min-score",
             "80",
             "--report",
@@ -17,16 +19,20 @@ def test_cli_parser_accepts_plan_report_and_schema_paths() -> None:
             "--schema",
             "schema.json",
             "--strict",
+            "--week",
+            "2026-W25",
         ]
     )
 
     assert args.plan.name == "plan.json"
     assert args.csv.name == "scores.csv"
     assert args.html.name == "report.html"
+    assert args.learning_log.name == "learning.md"
     assert args.min_score == 80
     assert args.report.name == "out.md"
     assert args.schema.name == "schema.json"
     assert args.strict
+    assert args.week == "2026-W25"
 
 
 @pytest.mark.parametrize("value", ["-1", "101", "high"])
