@@ -15,6 +15,11 @@ spreadsheet.
 
 Use `--html reports/quality-report.html` for a browser-readable report.
 
+## Learning Log
+
+Use `--learning-log reports/weekly-learning-log.md` to write a weekly
+reflection artifact grouped by contribution kind.
+
 ## JSON Schema
 
 Use `--schema reports/contribution-plan.schema.json` to generate a schema for
