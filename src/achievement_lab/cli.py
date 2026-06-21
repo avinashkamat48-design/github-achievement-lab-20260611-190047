@@ -12,6 +12,7 @@ from achievement_lab.loaders import load_contributions
 from achievement_lab.reporting import render_markdown
 from achievement_lab.schema import contribution_plan_schema
 from achievement_lab.summaries import render_terminal_summary
+from achievement_lab.templates import template_for, template_kinds
 from achievement_lab.validation import validate_contributions
 
 
@@ -27,7 +28,7 @@ def score_threshold(value: str) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Score planned GitHub contributions.")
-    parser.add_argument("plan", type=Path, help="Path to a JSON contribution plan")
+    parser.add_argument("plan", nargs="?", type=Path, help="Path to a JSON contribution plan")
     parser.add_argument("--csv", type=Path, help="Optional CSV score output path")
     parser.add_argument("--html", type=Path, help="Optional HTML report output path")
     parser.add_argument("--learning-log", type=Path, help="Optional weekly learning log output path")
@@ -35,12 +36,24 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--report", type=Path, help="Optional markdown report output path")
     parser.add_argument("--schema", type=Path, help="Optional JSON schema output path")
     parser.add_argument("--strict", action="store_true", help="Exit with an error when validation issues are present")
+    parser.add_argument("--template-kind", choices=template_kinds(), help="Write a starter plan for this kind")
+    parser.add_argument("--template-output", type=Path, help="Output path for --template-kind")
     parser.add_argument("--week", default="current week", help="Label to use in the weekly learning log")
     return parser
 
 
 def main() -> int:
-    args = build_parser().parse_args()
+    parser = build_parser()
+    args = parser.parse_args()
+    if args.template_kind:
+        if not args.template_output:
+            parser.error("--template-output is required with --template-kind")
+        args.template_output.parent.mkdir(parents=True, exist_ok=True)
+        args.template_output.write_text(json.dumps([template_for(args.template_kind)], indent=2) + "\n", encoding="utf-8")
+        print(f"wrote {args.template_output}")
+        return 0
+    if not args.plan:
+        parser.error("plan is required unless --template-kind is used")
     contributions = filter_by_min_score(load_contributions(args.plan), args.min_score)
     report = render_markdown(contributions)
 
