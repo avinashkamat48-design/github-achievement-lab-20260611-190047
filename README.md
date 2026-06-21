@@ -21,6 +21,7 @@ GitHub activity is useful enough to publish.
 - [Pull request checklist](docs/pr-checklist.md)
 - [Review notes](docs/review-notes.md)
 - [Learning log](docs/learning-log.md)
+- [Learning log export](docs/learning-log-export.md)
 - [Validation](docs/validation.md)
 - [Exports](docs/exports.md)
 - [Example plans](docs/examples.md)
@@ -34,6 +35,7 @@ python -m achievement_lab.cli examples/quality-plan.json \
   --report reports/quality-report.md \
   --csv reports/quality-report.csv \
   --html reports/quality-report.html \
+  --learning-log reports/weekly-learning-log.md \
   --schema reports/contribution-plan.schema.json
 ```
 
