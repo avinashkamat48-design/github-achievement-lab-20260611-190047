@@ -15,4 +15,5 @@ report:
 		--report reports/quality-report.md \
 		--csv reports/quality-report.csv \
 		--html reports/quality-report.html \
+		--learning-log reports/weekly-learning-log.md \
 		--schema reports/contribution-plan.schema.json
