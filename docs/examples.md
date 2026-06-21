@@ -10,6 +10,11 @@ A high-quality plan with verification, risks, and clear impact.
 
 A focused issue-triage plan that demonstrates reproducible evidence.
 
+## `docs-plan.json`
+
+A docs-focused plan that shows how documentation work can still include
+evidence, verification, and risk notes.
+
 ## `weak-plan.json`
 
 A deliberately weak plan. Use it with `--strict` to see validation failures:
