@@ -21,6 +21,7 @@ GitHub activity is useful enough to publish.
 - [Pull request checklist](docs/pr-checklist.md)
 - [Review notes](docs/review-notes.md)
 - [Learning log](docs/learning-log.md)
+- [Learning log completeness](docs/completeness.md)
 - [Learning log export](docs/learning-log-export.md)
 - [Validation](docs/validation.md)
 - [Exports](docs/exports.md)
