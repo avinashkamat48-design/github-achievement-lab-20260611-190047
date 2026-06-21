@@ -17,6 +17,8 @@ python -m achievement_lab.cli PLAN [options]
 - `--schema PATH`: write the contribution plan JSON schema.
 - `--min-score N`: only include contributions with score `N` or higher.
 - `--strict`: return a non-zero exit code when validation finds issues.
+- `--template-kind KIND`: generate a starter plan for a contribution kind.
+- `--template-output PATH`: write the generated starter plan.
 - `--week TEXT`: label to use in the weekly learning log.
 
 ## Example
@@ -30,4 +32,12 @@ python -m achievement_lab.cli examples/quality-plan.json \
   --schema reports/contribution-plan.schema.json \
   --week 2026-W25 \
   --strict
+```
+
+Generate a starter review plan:
+
+```bash
+python -m achievement_lab.cli \
+  --template-kind review \
+  --template-output examples/generated-review-plan.json
 ```
