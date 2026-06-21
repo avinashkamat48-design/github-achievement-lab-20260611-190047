@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Added weekly learning-log rendering.
+- Added CLI options for learning-log output and week labels.
+- Added docs and examples for docs-focused contribution plans.
+- Updated export and CLI references for the new learning-log artifact.
+
 ## 0.2.0
 
 - Added structured contribution plan validation and strict CLI mode.
