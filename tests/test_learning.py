@@ -26,6 +26,8 @@ def test_render_learning_log_groups_contributions_by_kind() -> None:
     assert "Week: 2026-W25" in log
     assert "- `docs`: 1" in log
     assert "- `review`: 1" in log
+    assert "- Verified entries: 2/2" in log
+    assert "- Complete: no" in log
     assert "Review parser validation" in log
 
 
