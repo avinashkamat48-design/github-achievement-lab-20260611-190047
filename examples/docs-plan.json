@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Document CLI export formats",
+    "kind": "docs",
+    "summary": "Explain how to generate Markdown, CSV, HTML, schema, and learning-log outputs from the CLI.",
+    "impact": "New users can reproduce every supported export without reading source code.",
+    "evidence": [
+      "README command preview",
+      "docs/exports.md"
+    ],
+    "tests": [
+      "python -m achievement_lab.cli examples/quality-plan.json --learning-log reports/weekly-learning-log.md"
+    ],
+    "risks": [
+      "examples must stay aligned with CLI option names"
+    ]
+  }
+]
