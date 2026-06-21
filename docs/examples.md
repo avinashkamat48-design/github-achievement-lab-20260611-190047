@@ -15,6 +15,11 @@ A focused issue-triage plan that demonstrates reproducible evidence.
 A docs-focused plan that shows how documentation work can still include
 evidence, verification, and risk notes.
 
+## `review-plan.json`
+
+A review-focused plan that demonstrates how an actionable review finding can
+include code-path evidence, verification, and reviewer assumptions.
+
 ## `weak-plan.json`
 
 A deliberately weak plan. Use it with `--strict` to see validation failures:
